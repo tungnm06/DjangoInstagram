@@ -1,0 +1,132 @@
+.account{
+  height: 80px;
+}
+.header-acc{
+  margin-left: -100px;
+  margin-bottom: 30px;
+  width: 600px;
+  height: 200px;
+  padding-left: 30px;
+  border: 1px solid #e6e6e6;
+  background-color: #f7f7f7;
+
+}
+.image-upload{
+  float: left;
+  margin-left: -100px;
+}
+
+.avatar-account{
+  margin-left: 190px;
+  margin-right: 190px;
+}
+.add-file{
+  display: none!important;
+}
+.add-avatar{
+  border: 0;
+    cursor: pointer;
+    padding: 0;
+
+}
+.avatar img{
+  height: 250px;
+  width: 250px;
+}
+.title{
+  margin-bottom: 12px;
+  width: auto;
+  float: left;
+}
+.title-h1{
+  float: left;
+  font-size: 22px;
+  line-height: 26px;
+}
+.account-icon{
+  float: left;
+  margin-top: 13px;
+  display: block;
+    overflow: hidden;
+    text-indent: 110%;
+    white-space: nowrap;
+    background-size: 229px 229px;
+      background-position: -205px 0;
+    height: 24px;
+    width: 24px;
+
+  background-image: url("https://instagram.com/static/bundles/base/sprite_glyphs_2x.png/ab069b2d113e.png");
+
+}
+.btn{
+  -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background: 0 0;
+    border: 0;
+    cursor: pointer;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    min-height: 40px;
+    min-width: 40px;
+    padding: 0;
+}
+.btn-edit{
+  float: left;
+  margin-top:   19px;
+
+}
+.follows{
+  margin-top: -42px;
+  margin-left: 13px;
+  margin-bottom: 5px;
+}
+.form-upload_avatar{
+  margin-top: 5px;
+}
+.account-btn{
+  float: left;
+}
+.div-ul{
+  padding: 0px;
+  list-style: none;
+  flex-direction: row;
+  display: flex;
+-webkit-box-orient: horizontal;
+-webkit-box-direction: normal;
+}
+.div-li{
+  font-size: 16px;
+    margin-right: 40px;
+}
+.fullname {
+  margin-top: 20px;
+  display: block;
+    font-size: 16px;
+    line-height: 24px;
+    word-wrap: break-word;
+  }
+.name-h1{
+  display: inline;
+  font-weight: 200;
+}
+.main-h1{
+  text-align: center;
+  font-size: 20px;
+
+}
+.upload-post{
+  text-align: center;
+  font-size: 20px;
+}

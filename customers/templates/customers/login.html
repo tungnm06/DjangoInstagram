@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <link href="{% static 'login.css' %}" rel="stylesheet">
+    <link href="{% static 'dangky.css' %}" rel="stylesheet">
+    <style>
+.erro{
+  margin-top: 40px;
+  margin-left: 70px;
+
+  color: red;
+}
+
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 sm6-bg">
+            <div class=bg>
+                <div class="bg-image">
+                    <img class="RP4i1"
+                         src="https://www.instagram.com/static/images/homepage/screenshot5.jpg/0a2d3016f375.jpg" alt="">
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-6 sm6-login">
+            <div class="login">
+                <div class="img-h1">
+                </div>
+                {% if error %}
+                <a class="erro">{{ error }}</a>
+                <br/>
+                <br/>
+                {% endif %}
+                <div class="form-login">
+                    <form method="POST" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="username" placeholder="Username"
+                                   name="username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password" placeholder="Enter password"
+                                   name="password">
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Đăng Nhập"/>
+                        <p class="login-text">Bằng cách đăng ký, bạn đồng ý với
+                            <a target="_blank" href="https://help.instagram.com/581066165581870">Điều khoản</a>
+                            , <a target="_blank" href="https://help.instagram.com/519522125107875">Chính sách dữ
+                                liệu</a>
+                            và <a target="_blank" href="/legal/cookies/">Chính sách cookie</a> của chúng tôi.</p>
+                    </form>
+                </div>
+
+            </div>
+            <div class="form-login2">
+
+                <p class="izU2O">Bạn chưa có tài khoản? <a href="/customers/create">Đăng ký</a></p>
+
+            </div>
+            <div class="form-ungdung">
+                <p class="b_nGN">Tải ứng dụng.</p>
+                <div class="ud-lienket">
+                    <a class="lienket"
+                       href="https://itunes.apple.com/app/instagram/id389801252?pt=428156&amp;ct=igweb.signupPage.badge&amp;mt=8&amp;ig_mid=W0r0_AALAAFxwrqXx1p4TWfAwhOn">
+                        <img class="Rt8TI" alt="Có sẵn trên App Store"
+                             src="https://www.instagram.com/static/images/appstore-install-badges/badge_ios_vietnamese-vi.png/3025bd262cee.png"></a>
+                    <a class="lienket"
+                       href="https://play.google.com/store/apps/details?id=com.instagram.android&amp;referrer=utm_source%3Dinstagramweb%26utm_campaign%3DsignupPage%26ig_mid%3DW0r0_AALAAFxwrqXx1p4TWfAwhOn%26utm_medium%3Dbadge">
+                        <img class="Rt8TI" alt="Có sẵn trên Google Play"
+                             src="https://www.instagram.com/static/images/appstore-install-badges/badge_android_vietnamese-vi.png/c36c88b5a8dc.png"></a>
+                    <a class="lienket" href="https://www.microsoft.com/en-us/store/apps/instagram/9nblggh5l9xt">
+                        <img class="Rt8TI" alt="Tải từ Microsoft"
+                             src="https://www.instagram.com/static/images/appstore-install-badges/badge_microsoft_vietnamese-vi.png/deb086209015.png"></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>

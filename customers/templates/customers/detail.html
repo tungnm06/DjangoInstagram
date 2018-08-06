@@ -1,0 +1,343 @@
+{% extends 'base.html' %}
+{% block title %}
+{% load staticfiles %}
+<link href="{% static 'account.css' %}" rel="stylesheet">
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f1f1f1;
+    padding: 20px;
+    font-family: Arial;
+}
+
+/* Center website */
+.main {
+    max-width: 1000px;
+    margin: auto;
+}
+
+h1 {
+    font-size: 50px;
+    word-break: break-all;
+}
+
+.row {
+    margin: 10px -16px;
+}
+
+/* Add padding BETWEEN each column */
+.row,
+.row > .column {
+    padding: 8px;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 33.33%;
+}
+
+/* Clear floats after rows */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Content */
+.content {
+    background-color: white;
+    padding: 10px;
+}
+
+/* The "show" class is added to the filtered elements */
+.show {
+  display: block;
+}
+/*avarta*/
+.image-upload > input
+{
+    display: none;
+}
+
+.image-upload img
+{
+    width: 280px;
+    height: 280px;
+    cursor: pointer;
+}
+/* Style the buttons */
+#file-input{
+  display: none;
+}
+#btnpost{
+  margin-left: -350px;
+}
+
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-4 sm4-avatar">
+            <div class="avatar">
+                <h1>{{request.customer}}</h1>
+                <!-- <button class="add-avatar" title="Thêm ảnh đại diện"><img alt="Thêm ảnh đại diện" class="be6sR" src="/media/{{customer.avatar}}"></button>
+                <div>
+
+                    <form method="POST" class="form-upload_avatar" action="{% url 'upload_avatar' customer_id=customer.id %}" enctype="multipart/form-data">
+                      {% csrf_token %}
+                        <div class="form-group">
+                          <input type="file" name="myfile" accept="image/jpeg,image/png">
+                        </div>
+                        <input type="submit" value="Submit" />
+                    </form>
+                </div> -->
+                <div class="image-upload">
+                    <form method="POST" class="form-upload_avatar"
+                          action="{% url 'upload_avatar' customer_id=customer.id %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label for="file-input">
+                            <img src="/media/{{customer.avatar}}" class="img-circle"/>
+                        </label>
+                        <input id="file-input" type="file" name="myfile" accept="image/jpeg,image/png">
+                        <input type="submit" id="Up" style="display: none;"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 sm8-account">
+            <div class="header-acc">
+                <div class="account">
+                    <div class="title">
+                        <h1 class="title-h1">{{customer.fullname}}</h1>
+                    </div>
+                    <div class="account-btn">
+                        <button class="btn"><span class="account-icon">Tùy chọn</span></button>
+                    </div>
+                    <div class="btn-edit"><a class=" btn-herf" href="/customers/edit/{{customer.id}}"><span
+                            class="tMKW3 _1OSdk"><button class="_5f5mN    -fzfL     _6VtSN     yZn4P   ">Chỉnh sửa trang cá nhân</button></span></a>
+                    </div>
+
+                </div>
+                <div>
+                    <ul class="div-ul ">
+                        <li class="div-li "><span class="-nal3 "><a class="g47SY ">{{len_post}}</a> bài viết</span>
+                        </li>
+                        <li class="div-li"><a class="-nal3" href="/tungnmd00439/followers/"><span class="follow_count">{{follows}}</span>
+                            người theo dõi</a></li>
+                        <li class="div-li "><a class="-nal3 " href="/tungnmd00439/following/">Đang theo dõi <span
+                                class="following_count">{{followings}}</span> người dùng</a></li>
+                    </ul>
+                </div>
+                <!-- <a href="/customers/upload/{{customer.id}}"> Hehe</a> -->
+            </div>
+            <div class="upload-post">
+                <button type="button" id="btnpost" class="btn btn-info btn-lg" data-toggle="modal"
+                        data-target="#myModal">Đăng Bài Mới
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Modal Header</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="upload-image">
+                                    <p class="statusMsg"></p>
+                                    <form method="POST" action="{% url 'upload' customer_id=customer.id %}"
+                                          enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="content"
+                                                   placeholder="Nội dung bài post" name="content"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="file" name="myfile" multiple>
+                                        </div>
+                                        <input class="btn btn-primary" type="submit" value="Submit"/>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<br>
+<br>
+
+<div class="container ctn-image">
+    <div class="row">
+        <div class="col-sm-12 display-image">
+            <div class="main">
+                <div class="test">
+                    <!-- aaaaaaaaaaaaaaaazxcxzczx
+                    {% for comment in listcm2 %}
+                    {% for cmt in comment %}
+                    <a style="color:blue;">{{cmt.text}}aaaaa </a>
+                    <br>
+                    <a style="color:#000;">{{cmt1.customer.id}}</a> <button  class="edit-cmt" type="button" class="btn btn-default" data-commentid="{{cmt1.id}}">Edit</button>
+                    <input type="hidden" name="newcomment" style="display: none;" />
+                    <br>
+                    {% endfor %}
+                    {% endfor %}
+                  </div> -->
+                    <div class="main-h1">
+                        <a>ẢNH ĐÃ ĐĂNG LÊN</a>
+                        <hr>
+                    </div>
+                    <!-- Portfolio Gallery Grid -->
+                    <div class="row">
+                        {% for img in listimg2 %}
+
+                        <div class="column nature">
+                            <div class="content">
+                                <a>
+                                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+                                            data-target="#myModal{{img.id}}">
+                                        <img src="/media/{{img.imageurl}}" alt="Mountains" width="300px" height="300px">
+                                    </button>
+                                    <div class="modal fade" id="myModal{{img.id}}" role="dialog">
+                                        <div class="modal-dialog">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;
+                                                    </button>
+                                                    <h4 class="modal-title">Modal Header</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="img-modal">
+                                                        <img src="/media/{{img.imageurl}}" alt="Mountains" width="300px"
+                                                             height="300px">
+                                                    </div>
+                                                    <div class="comment" style="max-height:150px; overflow-y:auto">
+                                                        {% for listcmt in listcm2 %}
+                                                        {% for cmt in listcmt %}
+                                                        {% if cmt.post_id == img.post_id %}
+                                                        <a style="color:blue;">{{cmt.customer.fullname}} </a>
+                                                        <br>
+                                                        <a style="color:#000;">{{cmt.text}}</a>
+                                                        <button class="edit-cmt" type="button" class="btn btn-default"
+                                                                data-commentid="{{cmt1.id}}">Edit
+                                                        </button>
+                                                        <input type="hidden" name="newcomment" style="display: none;"/>
+                                                        <br>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                        {% endfor %}
+                                                    </div>
+                                                    <br>
+                                                    <a>{{img.post.content}}</a>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        <!-- END GRID -->
+                    </div>
+
+
+                    <!-- END MAIN -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+    {% block javascript %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+$( "#file-input" ).change(function() {
+     $( "#Up" ).click();
+   });
+$(".following").click(function(){
+      var customerdetail;
+      var customerid;
+      customerdetail = $(this).attr("data-customerdetail");
+      customerid = $(this).attr("data-customerid");
+  $.ajax({
+  type: 'POST',
+  url: "{% url 'follow' %}",
+  data: {'customerdetail_id': customerdetail,
+   'customer_id': customerid,
+   csrfmiddlewaretoken:
+                       '{{ csrf_token }}'},
+  dataType: 'json',
+  success: function(data) {
+    console.log(data);
+    $('.follow_count').empty();
+    $('.following_count').empty();
+    $('.follow_count').html(data.nfollow);
+    $('.following_count').html(data.len_followings);
+    alert(data);
+  }
+});
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+    {% endblock %}

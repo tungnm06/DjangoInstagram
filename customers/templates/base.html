@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    {% load staticfiles %}
+    {% block title %}
+    {% endblock %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="{% static 'layout.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <script scr="{% static 'jquery.js' %}" type="text/javascript"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body style="height:1500px">
+<header>
+    <div class="nav-fix">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="logo-header">
+                    <a href="/customers/newfeed/{{user_id}}" class="a-icon" width=200px>
+                        <div class="nav-header">
+
+                        </div>
+                    </a>
+                </div>
+
+                <div class="input-timkiem">
+                    <!-- <input class="XTCLo x3qfX " type="text" autocapitalize="none" placeholder="Tìm kiếm" value=""> -->
+                    <div class="search-container">
+
+                        <form method="post" name="searchform" id="searchform"
+                              action="{% url 'search' user_id=user_id %}" enctype="multipart/form-data">{% csrf_token %}
+                            <input type="text" name="q" id="search" placeholder="Search.." onkeypress="myFunction()">
+                            <button type="submit" class="btnsearch"><i class="fa fa-search"></i></button>
+
+                        </form>
+
+
+                        <style>
+       .navbar-fixed-top{
+         height: 80px;
+       }
+
+       .container-fluid{
+         background-color: #5bc0de;
+           border-color: #46b8da;
+
+       }
+       .hienthi{
+        margin-left: -200px;
+        width: 200px;
+        height: auto;
+        /* border: 1px solid #e6e6e6; */
+        margin-top: -27px;
+       }
+       .hienthi ul{
+         list-style: none;
+         padding: 0;
+       }
+
+                        </style>
+                        <div class="hienthi">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <a href="/customers/logout">
+                        <button type="button" id="logout" class="btn btn-primary ">
+                            ĐĂNG XUẤT
+                        </button>
+                        <a/>
+                </div>
+                <div class="nav-icon">
+                    <div class="icon1">
+                        <a href="/customers/detail/{{user_id}}">
+                            <div class="nav-icon1">
+
+                            </div>
+                        </a>
+
+                    </div>
+                    <div class="icon2">
+                        <a id="notifi">
+                            <div class="nav-icon2">
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                    <div class="icon3">
+                        <a href="/customers/detail/{{user_ids}}">
+                            <div class="nav-icon3">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <style>
+  .row2{
+    display: none;
+    float: right;
+    margin-top: 15px;
+    margin-right: 350px;
+    width: 400px;
+    background-color: lightblue;
+    padding: 20px;
+    border-style: groove;
+  }
+
+
+                </style>
+                <div class="row2" style="max-height:500px; overflow-y:auto">
+
+
+                    {% for item in notifi.all %}
+                    {% if item.customer_id == item.customer_user_id %}
+                    <span></span>
+
+                    {% else %}
+                    <a></a>
+
+                    <img src="/media/{{item.customer_user.avatar}}" width="20px"/>
+
+                    <a href="/customers/{{item.customer_id}}/postdetail/{{item.post_id}}">{{item.description}}</a><br>
+                    <span>{{item.createtime}}</span>
+                    <br>
+                    <br>
+                    {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div>
+
+        </nav>
+    </div>
+</header>
+<div class="main">
+    <div class="container base_container">
+        <br/>
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
+</div>
+<footer class="text-muted">
+    <div class="container text-center">
+        <p></p>
+    </div>
+
+</footer>
+{% block javascript %}
+{% endblock %}
+<script type="text/javascript">
+
+$("#notifi").click(function(){
+  $(".row2").css({
+    "display": "block"});
+});
+
+
+
+function myFunction(){
+$("#searchform").submit();
+}
+$( "body" ).on( "click", ".container-fluid", function() {
+  $(".hienthi").empty()
+
+});
+$( "body" ).on( "click", ".container", function() {
+  $(".hienthi").empty()
+  $(".row2").css({
+    "display": "none"});
+});
+ $(document).ready(function() {
+       $("#searchform").on("submit",function(e){
+           e.preventDefault();
+           var form = $(this);
+           $.post(form.attr('action'), form.serialize())
+              .done(function(customer_dict) {
+                $(".hienthi").empty()
+                for (i in customer_dict.customer) {
+
+                    $(".hienthi").append(
+                      '<img width="30px" height="30px" src="/media/' + customer_dict.customer[i].avarta+'">' + "  "+
+                    '<a href="/customers/'+customer_dict.customer[i].user_id+'/viewdetail/'+customer_dict.customer[i].id+'">' + customer_dict.customer[i].fullname +'</a>'+'<hr>'
+                    )
+                    $(".hienthi").css({
+
+           "background-color": "#fff"});
+}
+
+})
+           })
+           });
+
+</script>
+</body>
+</html>

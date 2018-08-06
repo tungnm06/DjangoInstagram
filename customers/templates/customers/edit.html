@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}
+{% load staticfiles %}
+<link href="{% static 'edit.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 sm3-left">
+            <ul class="sm3-ul">
+                <li><a class="sm3-li " href="/customers/edit/{{customer.id}}">Chỉnh sửa trang cá nhân</a></li>
+                <li><a class="sm3-li" href="/customers/editpass/{{customer.id}}">Đổi mật khẩu</a></li>
+                <li><a class="sm3-li" href="/customers/manage_access/">Ứng dụng đã được cho phép</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 sm9-right">
+            <div class="edit-account">
+                <div class="title"></div>
+                <form method="POST" action="{% url 'edit' customer_id=customer.id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h2>Chinh sua thong tin </h2>
+                    <div class="form-group">
+                        <label for="pepName">Tên</label>
+                        <input type="text" class="form-control" id="fullname" value="{{customer.fullname}}"
+                               name="fullname">
+                    </div>
+                    <div class="form-group">
+                        <label for="pepName">Tên Người Dùng</label>
+                        <input type="text" class="form-control" id="username" value="{{customer.username}}"
+                               name="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="pepName">Email</label>
+                        <input type="text" class="form-control" id="email" value="{{customer.email}}" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="pepName">Phone</label>
+                        <input type="text" class="form-control" id="phone" value="{{customer.phone}}" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="pepName">Gender</label>
+                        <select id="gender" value="{{customer.gender}}" name="gender" class="form-control">
+                            <option value="nam">Nam</option>
+                            <option value="nu">Nữ</option>
+                            <option value="no">Chưa Xác Định</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pepName">Thông tin về bạn</label>
+                        <input type="text" class="form-control" id="info" value="{{customer.info}}" name="info"></div>
+                    <div class="form-group">
+                        <label for="pepName">Address</label>
+                        <input type="text" class="form-control" id="address" value="{{customer.address}}"
+                               name="address"></div>
+                    <div class="form-group">
+                        <label for="pepName">Vô Hiệu Hóa Tài Khoản(Yes or No)</label>
+                        <select id="status" name="status" class="form-control">
+
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                        <br>
+                        <input class="btn btn-primary" type="submit" value="Edit"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

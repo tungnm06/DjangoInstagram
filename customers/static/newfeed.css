@@ -1,0 +1,27 @@
+.sm6-post{
+  float: left;
+  margin-bottom: 40px;
+}
+
+.avatar-newfeed{
+  float: left;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+.post-header{
+  height: 70px;
+  border: 1px solid #e6e6e6;
+
+}
+
+.name{
+padding-top: 25px;
+}
+.ilc {
+  border: 1px solid #e6e6e6;
+
+}
+.content{
+margin: 10px;
+
+}

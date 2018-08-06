@@ -1,0 +1,75 @@
+.container-fluid{
+  height: 100px;
+  background-color: #fff;
+}
+.nav-fix{
+  height: 100px;
+}
+.nav-header{
+  margin-top: 20px;
+  margin-left: 150px;
+  background-size: 432px 401px;
+  background-position: -92px -149px;
+  background-image: url("https://instagram.com/static/bundles/base/sprite_core_2x.png/d4e55360dbe2.png");
+  width: 181px;
+  height: 35px;
+  float: left;
+}
+.a-icon{
+
+}
+.nav-icon{
+  width: 300px;
+  margin-top: 35px;
+  float: left;
+  height: auto;
+  display: block;
+    overflow: hidden;
+    text-indent: 110%;
+    white-space: nowrap;
+}
+.input-timkiem{
+  float: left;
+  -webkit-box-flex: 0;
+-webkit-flex: 0 1 auto;
+-ms-flex: 0 1 auto;
+flex: 0 1 auto;
+min-width: 125px;
+width: 215px;
+margin-top: 35px;
+  margin-left: 250px;
+}
+.nav-icon1{
+  background-size: 432px 401px;
+  background-position: -100px -377px;
+  background-image: url("https://instagram.com/static/bundles/base/sprite_core_2x.png/d4e55360dbe2.png");
+  height: 24px;
+  width: 24px;
+  margin-left: 40px;
+}
+.nav-icon2{
+  background-size: 432px 401px;
+    background-position: -369px -336px;
+    background-image: url("https://instagram.com/static/bundles/base/sprite_core_2x.png/d4e55360dbe2.png");
+    height: 24px;
+    width: 24px;
+    margin-left: 50px;
+
+}
+.nav-icon3{
+  background-size: 432px 401px;
+background-position: -295px -336px;
+background-image: url("https://instagram.com/static/bundles/base/sprite_core_2x.png/d4e55360dbe2.png");
+height: 24px;
+width: 24px;
+margin-left: 50px;
+}
+.icon1{
+  float: left;
+}
+.icon2{
+  float: left;
+}
+.icon3{
+  float: left;
+}

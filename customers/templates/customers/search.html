@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}
+{% load staticfiles %}
+<link href="{% static 'account.css' %}" rel="stylesheet">
+
+{% endblock %}
+{% block content %}
+<!--<div>
+  <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#modalForm">
+  Open Contact Form
+</button> -->
+
+<!-- Modal -->
+
+<!-- Modal Body -->
+<div class="upload-image">
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+</div>
+<div class="search-container">
+
+    <form method="post" name="searchform" id="searchform" action="{% url 'search' %}" enctype="multipart/form-data">{%
+        csrf_token %}
+        <input type="text" name="q" id="search" placeholder="Search.." onkeypress="myFunction()">
+        <button type="submit" class="btnsearch"><i class="fa fa-search"></i></button>
+
+    </form>
+
+
+    <style>
+             .hienthi{
+               width: 200px;
+               height: auto;
+               border: 1px solid #e6e6e6;
+             }
+             .hienthi ul{
+               list-style: none;
+               padding: 0;
+             }
+
+    </style>
+    <div class="hienthi">
+
+
+    </div>
+
+</div>
+
+</div>
+</div>
+</div>
+
+{% endblock %}
+{% block javascript %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+ $(document).ready(function() {
+       $("#searchform").on("submit",function(e){
+           e.preventDefault();
+           var form = $(this);
+           $.post(form.attr('action'), form.serialize())
+              .done(function(customer_dict) {
+                $(".hienthi").empty()
+                for (i in customer_dict.customer) {
+
+                    $(".hienthi").append(
+                      '<img width="30px" height="30px" src="/media/' + customer_dict.customer[i].avarta+'">' + "  "+
+                    '<a href="/customers/detail/'+customer_dict.customer[i].id+'">' + customer_dict.customer[i].fullname +'</a>'+'<br>'
+                    )
+}
+})
+           })
+           });
+
+ function myFunction(){
+ $("#searchform").submit();
+
+
+}
+
+</script>
+{% endblock %}

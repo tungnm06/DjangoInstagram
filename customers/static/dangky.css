@@ -1,0 +1,98 @@
+
+.container-fluid{
+  background-color: #fafafa;
+}
+.sm6-dangky{
+  margin-top: 100px;
+}
+.sm6-bg{
+  align-self: center;
+
+  background-position: 0 0;
+  background-size: 454px 618px;
+  flex-basis: 454px;
+  height: 618px;
+
+}
+.bg{
+  width: 70%;
+  height: 600px;
+  margin: 150px 0 0 220px;
+  position: relative;
+
+  background-image: url("homephone.png");
+
+}
+
+.bg img{
+margin-left: 148px;
+margin-top: 95px;
+width: 56%;
+
+}
+.form-dangnhap{
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 1px;
+  height: 80px;
+  padding: 10px 0;
+  width:  65%;
+  margin-top: 20px;
+  padding-top: 30px;
+  margin-bottom: 20px;
+}
+.dangky{
+background-color: #fff;
+border: 1px solid #e6e6e6;
+border-radius: 1px;
+margin: 0 0 10px;
+padding: 10px 0;
+width:  65%;
+}
+.dangky h1{
+  text-align: center;
+}
+.img-h1{
+  margin-left: 30%;
+  margin-top: 20px;
+  background-repeat: no-repeat;
+      background-position: -98px -150px;
+      height: 51px;
+      width: 175px;
+  background-image: url("https://instagram.com/static/bundles/base/sprite_core.png/a87cd48dad00.png");
+
+}
+.dangky h2{
+  font-weight: 600;
+  line-height: 20px;
+  font-size: 18px;
+
+  text-align: center;
+  color: #999;
+  text-align: center;
+  margin-bottom : 20px;
+  margin-top: -20px;
+}
+.form-dangky{
+  margin: 40px;
+}
+
+.dangky-text{
+  color: #999;
+  margin: 10px 30px;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+}
+.form-ungdung{
+  width: 65%
+}
+.form-ungdung p{
+  text-align: center;
+}
+.ud-lienket img{
+  width: 32%;
+  height: 50px;
+  margin-left: 2px;
+}

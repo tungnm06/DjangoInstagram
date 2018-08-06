@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}
+{% load staticfiles %}
+<link href="{% static 'edit.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 sm3-left">
+            <ul class="sm3-ul">
+                <li><a class="sm3-li " href="/customers/edit/{{customer.id}}">Chỉnh sửa trang cá nhân</a></li>
+                <li><a class="sm3-li" href="/customers/editpass/{{customer.id}}">Đổi mật khẩu</a></li>
+                <li><a class="sm3-li" href="/customers/manage_access/">Ứng dụng đã được cho phép</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 sm9-right">
+            <div class="edit-account">
+                <div class="title"></div>
+                <form method="POST" action="{% url 'editpass' customer_id=customer.id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h2>{{customer.username}} </h2>
+                    <div class="form-group">
+                        <label for="lblPassOld">Mật Khẩu Cũ</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password"
+                               name="passwordOld">
+                    </div>
+                    <div class="form-group">
+                        <label for="lblPassNew">Mật Khẩu Mới</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password"
+                               name="passwordNew">
+                    </div>
+                    <div class="form-group">
+                        <label for="lblPassConfirm">Xác Nhận Mật Khẩu</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password"
+                               name="passwordConfirm">
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Edit"/>
+                </form>
+                <a href="">{{ return_submit }}</a></p>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

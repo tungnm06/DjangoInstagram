@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+{% block title %}
+{% load staticfiles %}
+<link href="{% static 'account.css' %}" rel="stylesheet">
+<link href="{% static 'newfeed.css' %}" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+.comments a{
+  margin-right:  20px;
+
+}
+.a-text{
+  color: #000;
+}
+.a-name{
+  color: blue;
+}
+
+
+</style>
+{% endblock %}
+{% block content %}
+<div class="newfeed">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 sm6-post">
+
+                {% for post in posts.all %}
+
+                {% for fl in follow %}
+                {% if post.customer.id == fl.cusdetail_id %}
+                <div class="post-header">
+                    <div class="avatar-newfeed">
+                        <img src="/media/{{post.customer.avatar}}" class="img-circle" alt="Cinque Terre" width="45"
+                             height="45">
+                    </div>
+                    <div class="name">
+                        <a href="/customers/{{customer_id}}/viewdetail/{{post.customer.id}}">{{post.customer.fullname}}</a>
+                    </div>
+                </div>
+                <div class="ilc">
+                    <div class="image">
+
+
+                        <div id="myCarousel{{post.id}}" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for listimg1 in listimg2 %}
+                                {% for img in listimg1 %}
+                                {% if img.post_id == post.id %}
+                                {% if forloop.first %}
+                                <div class="item active">
+                                    <img class="img2" src="/media/{{img.imageurl}}">
+                                </div>
+
+                                {% else %}
+                                <div class="item">
+                                    <img class="img2" src="/media/{{img.imageurl}}">
+                                </div>
+                                <a class="left carousel-control" href="#myCarousel{{post.id}}" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel{{post.id}}" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                                {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                                {% endfor %}
+                            </div>
+                            <style>
+    #myCarousel{{post.id}}{
+      width: 100%;
+      height: 100%;
+    }
+    #myCarousel{{post.id}} img{
+      width: 100%;
+      height: 600px;
+    }
+    .comments{
+      margin-top: 15px;
+      padding: 20px;
+    }
+
+                            </style>
+
+                            <!-- Left and right controls -->
+
+                        </div>
+
+
+                    </div>
+                    <div class="likes">
+                        <!--  <button type="button" class="btn btn-default" aria-label="Left Align">
+                        <span class=" glyphicon glyphicon-heart" aria-hidden="true"></span> -->
+                        {% for key, value in dictlike.items %}
+                        {% if key == post.id %}
+                        <span id="{{post.id}}like">{{value}}</span> <a>Like</a>
+
+                        {% endif %}
+                        {% endfor %}
+                        <a class="a-name"></a>
+                        <br>
+                        <br>
+                        <button type="button" data-customerid="{{user_id}}" data-postid="{{post.id}}" class="nlikes">Yêu
+                            Thích
+                        </button>
+                        </button>
+                    </div>
+                    <div class="content">
+                        <a>{{post.content}}</a>
+                    </div>
+                    <div class="comments" style="max-height:214px; overflow-y:auto">
+                        <div class="newcomment">
+                            <span class="newcomment2" id="{{post.id}}"></span>
+                        </div>
+
+                        {% for listcm1 in listcmt2 %}
+                        {% for cmt in listcm1 %}
+                        {% if cmt.post_id == post.id %}
+                        <a class="fullname">{{cmt.customer.fullname}}</a><a class="createtime">{{cmt.createtime}}</a>
+                        <br>
+                        <a>-----</a><a class="comment">{{cmt.text}}</a>
+                        <br>
+                        {% endif %}
+                        {% endfor %}
+                        {% endfor %}
+
+
+                    </div>
+                </div>
+                <div class="comment">
+                    <!-- <form method="POST" action="{% url 'comments' post_id=post.id  id_customer=customer_id %}" enctype="multipart/form-data">
+                      {% csrf_token %}
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="text" placeholder="Thêm bình luận ..." name="text">
+                        </div>
+                    <input class="btn btn-primary" type="submit" value="Submit" />
+
+                  </form> -->
+                    <form method="POST" data-postid="{{post.id}}" class="commentForm" name="commentForm"
+                          action="{% url 'comments' post_id=post.id  id_customer=customer_id %}"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group cmt-input">
+                            <input type="text" class="form-control inputcmt" id="cmt{{post.id}}" value=""
+                                   placeholder="Thêm bình luận ..." name="text">
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Bình Luận"/>
+
+                    </form>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+            </div>
+
+            <div class="col-sm-4 sm6-update">
+                <div><h1 style="position: fixed;">{{namecus}}</h1>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="upload-post">
+
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalx"
+                            style="position: fixed;">Đăng Bài Mới
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModalx" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Modal Header</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="upload-image">
+                                        <p class="statusMsg"></p>
+                                        <form method="POST" action="{% url 'upload' customer_id=customer.id %}"
+                                              enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="content"
+                                                       placeholder="Nội dung bài post" name="content"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="file" name="myfile" multiple>
+                                            </div>
+                                            <input class="btn btn-primary" type="submit" value="Submit"/>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    $(".nlikes").click(function(){
+      var urls ="{% url 'like' %}"
+
+          var postid;
+          var customerid;
+          postid = $(this).attr("data-postid");
+          customerid = $(this).attr("data-customerid");
+      $.ajax({
+      type: 'POST',
+      url: "{% url 'like' %}",
+      data: {'post_id' : postid,
+       'customer_id': customerid,
+       csrfmiddlewaretoken:
+                           '{{ csrf_token }}'},
+      dataType: 'json',
+      success: function(data) {
+        console.log(data);
+        $("#" + postid+"like").html(data);
+        alert(data);
+      }
+    });
+ });
+
+
+ $(document).ready(function() {
+
+        $(".commentForm").on("submit",function(e){
+          var postid;
+          var postid = $(this).attr("data-postid");
+            e.preventDefault();
+            alert(1);
+            var form = $(this);
+            $.post(form.attr('action'), form.serialize())
+               .done(function(data) {
+
+                if(data.Erro.length < 10){
+                  $(".inputcmt").val('')
+                    $("#" + postid).append('<a>' + data.dataname+ '<br>'+ data.createtime + '<br>' +'------   '+ data.datacmt +'</a>'+'<br>');
+                }else{
+                  alert(data.Erro);
+                }
+
+
+
+})
+           // do something on success: perhaps show a "comment posted!" message.
+            })
+
+            });
+
+
+</script>
+{% endblock %}
